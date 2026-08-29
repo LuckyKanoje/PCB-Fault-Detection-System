@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Smart PCB Inspection</title>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Arial;background:#f4f6f8;color:#222}
+
+header{
+    background:#1f2937;color:white;padding:18px 35px;
+    display:flex;justify-content:space-between
+}
+.status{color:#b9f6ca}
+
+.container{width:92%;max-width:1200px;margin:30px auto}
+.welcome{margin-bottom:25px}
+.welcome p{color:#666}
+
+.stats{
+    display:grid;grid-template-columns:repeat(4,1fr);
+    gap:18px;margin-bottom:25px
+}
+
+.card,.stat-card{
+    background:white;padding:20px;
+    border:1px solid #e5e7eb;border-radius:10px
+}
+
+.stat-card h3{font-size:14px;color:#777;margin-bottom:10px}
+.stat-card p{font-size:25px;font-weight:bold}
+
+.inspection-area{
+    display:grid;grid-template-columns:1.3fr 1fr;gap:25px
+}
+
+.image-box{
+    height:350px;background:#eef1f4;
+    border:2px dashed #c7cdd4;border-radius:8px;
+    display:flex;justify-content:center;align-items:center;
+    overflow:hidden
+}
+
+.image-box img{max-width:100%;max-height:100%;display:none}
+.image-placeholder{text-align:center;color:#777}
+
+.buttons{margin-top:18px;display:flex;gap:12px}
+
+button{
+    border:0;padding:11px 18px;border-radius:6px;
+    cursor:pointer;font-size:14px
+}
+
+.upload-btn{background:#e5e7eb}
+.inspect-btn{background:#2563eb;color:white}
+
+.result-box{background:#f8fafc;padding:18px;border-radius:8px}
+.result-status{
+    text-align:center;padding:15px;border-radius:7px;
+    margin-bottom:20px;font-size:22px;font-weight:bold
+}
+
+.pass{background:#dcfce7;color:#166534}
+.fail{background:#fee2e2;color:#991b1b}
+
+.result-row{
+    display:flex;justify-content:space-between;
+    padding:12px 0;border-bottom:1px solid #e5e7eb
+}
+
+.label{color:#666}
+.value{font-weight:bold}
+
+.history{margin-top:25px}
+table{width:100%;border-collapse:collapse}
+th,td{padding:13px;text-align:left;border-bottom:1px solid #e5e7eb}
+th{background:#f8fafc;color:#555}
+.pass-text{color:#15803d;font-weight:bold}
+.fail-text{color:#dc2626;font-weight:bold}
+
+footer{
+    text-align:center;color:#777;padding:25px;
+    margin-top:30px;font-size:13px
+}
+
+@media(max-width:800px){
+    .stats{grid-template-columns:repeat(2,1fr)}
+    .inspection-area{grid-template-columns:1fr}
+}
+
+@media(max-width:500px){
+    .stats{grid-template-columns:1fr}
+    .buttons{flex-direction:column}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div><b>Smart PCB Inspection</b></div>
+    <div class="status">● System Ready</div>
+</header>
+
+<div class="container">
+
+    <div class="welcome">
+        <h1>PCB Fault Detection Dashboard</h1>
+        <p>Inspect PCB images and check for possible manufacturing defects.</p>
+    </div>
+
+    <div class="stats">
+        <div class="stat-card">
+            <h3>Total Inspected</h3>
+            <p id="totalPCB">24</p>
+        </div>
+
+        <div class="stat-card">
+            <h3>Passed</h3>
+            <p id="passedPCB">18</p>
+        </div>
+
+        <div class="stat-card">
+            <h3>Failed</h3>
+            <p id="failedPCB">6</p>
+        </div>
+
+        <div class="stat-card">
+            <h3>Last Inspection</h3>
+            <p id="lastInspection">--</p>
+        </div>
+    </div>
+
+    <div class="inspection-area">
+
+        <div class="card">
+            <h2>PCB Image</h2>
+
+            <div class="image-box">
+                <div class="image-placeholder" id="placeholder">
+                    <b>No PCB Image</b>
+                    <p>Upload an image to start inspection</p>
+                </div>
+                <img id="pcbImage" alt="PCB Image">
+            </div>
+
+            <div class="buttons">
+                <input type="file" id="imageInput" accept="image/*" hidden>
+
+                <button class="upload-btn"
+                    onclick="imageInput.click()">
+                    Choose PCB Image
+                </button>
+
+                <button class="inspect-btn" onclick="inspectPCB()">
+                    Inspect PCB
+                </button>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>Inspection Result</h2>
+
+            <div class="result-box">
+
+                <div id="resultStatus" class="result-status pass">
+                    PASS
+                </div>
+
+                <div class="result-row">
+                    <span class="label">PCB ID</span>
+                    <span class="value" id="pcbID">PCB-001</span>
+                </div>
+
+                <div class="result-row">
+                    <span class="label">Defect</span>
+                    <span class="value" id="defect">No Defect</span>
+                </div>
+
+                <div class="result-row">
+                    <span class="label">Confidence</span>
+                    <span class="value" id="confidence">98%</span>
+                </div>
+
+                <div class="result-row">
+                    <span class="label">Date & Time</span>
+                    <span class="value" id="inspectionTime">--</span>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <div class="card history">
+        <h2>Recent Inspection History</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>PCB ID</th>
+                    <th>Status</th>
+                    <th>Defect</th>
+                    <th>Confidence</th>
+                </tr>
+            </thead>
+
+            <tbody id="historyTable">
+                <tr>
+                    <td>PCB-001</td>
+                    <td class="pass-text">PASS</td>
+                    <td>No Defect</td>
+                    <td>98%</td>
+                </tr>
+
+                <tr>
+                    <td>PCB-002</td>
+                    <td class="fail-text">FAIL</td>
+                    <td>Broken Track</td>
+                    <td>94%</td>
+                </tr>
+
+                <tr>
+                    <td>PCB-003</td>
+                    <td class="fail-text">FAIL</td>
+                    <td>Solder Bridge</td>
+                    <td>91%</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+<footer>
+    PCB Fault Detection System<br>
+    Raspberry Pi 4 • 8 MP Camera • OpenCV
+</footer>
+
+<script>
+
+imageInput.addEventListener("change", function(){
+    if(this.files[0]){
+        pcbImage.src = URL.createObjectURL(this.files[0]);
+        pcbImage.style.display = "block";
+        placeholder.style.display = "none";
+    }
+});
+
+function inspectPCB(){
+
+    let id = "PCB-" + (Math.floor(Math.random()*900)+100);
+    let now = new Date();
+    let fail = Math.random() > 0.5;
+
+    pcbID.innerText = id;
+    inspectionTime.innerText = now.toLocaleString();
+    lastInspection.innerText = now.toLocaleTimeString();
+
+    if(fail){
+        resultStatus.innerText = "FAIL";
+        resultStatus.className = "result-status fail";
+        defect.innerText = "Broken Track";
+        confidence.innerText = "95%";
+    }else{
+        resultStatus.innerText = "PASS";
+        resultStatus.className = "result-status pass";
+        defect.innerText = "No Defect";
+        confidence.innerText = "98%";
+    }
+
+    console.log("PCB inspection completed:", id);
+}
+
+</script>
+
+</body>
+</html>
