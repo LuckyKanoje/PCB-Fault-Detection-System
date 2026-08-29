@@ -479,29 +479,17 @@ Roll No.
 
 Team Member
 
-130
+130 Chetan Kanoje
 
-Chetan Kanoje
+136 Kundan Wadibhasme
 
-136
+151 Yash Motharkar
 
-Kundan Wadibhasme
+155 Prajwal Agashe
 
-151
+158 Sakshi Suryawanshi
 
-Yash Motharkar
-
-155
-
-Prajwal Agashe
-
-158
-
-Sakshi Suryawanshi
-
-Project Guide
-
-Dr. (Mrs.) S.P. Washimkar
+Project Guide Dr. (Mrs.) S.P. Washimkar
 
 ## 📷 Project Screenshots
 
