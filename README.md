@@ -80,7 +80,7 @@ PCB holder and controlled lighting
 
 Data storage and optional remote monitoring
 
-⚙️ Working Principle
+## ⚙️ Working Principle
 
 1. System Initialization
 
@@ -128,7 +128,7 @@ Difference > Threshold
         ↓
 Red LED + Buzzer / Display
 
-💻 Current Web Prototype
+## 💻 Current Web Prototype
 
 The current frontend is implemented using:
 
@@ -156,7 +156,7 @@ if (fail) {
 
 This is only for testing the interface. It is not the final AI fault-detection algorithm.
 
-🧰 Hardware Components
+## 🧰 Hardware Components
 
 Component
 
@@ -206,7 +206,7 @@ MicroSD Card
 
 Software/data storage
 
-🛠️ Technology Stack
+## 🛠️ Technology Stack
 
 Technology
 
@@ -244,11 +244,10 @@ AI / Deep Learning
 
 Planned defect detection
 
-GPIO
 
 Planned LED/buzzer control
 
-📂 Repository Structure
+## 📂 Repository Structure
 
 PCB-Fault-Detection-System/
 │
@@ -278,11 +277,11 @@ PCB-Fault-Detection-System/
 │
 └── requirements.txt
 
-🚀 How to Run the Current Web Demo
+## 🚀 How to Run the Current Web Demo
 
 1. Clone the repository
 
-git clone https://github.com/YOUR-USERNAME/PCB-Fault-Detection-System.git
+git clone [https://github.com/YOUR-USERNAME/PCB-Fault-Detection-System.git](https://github.com/LuckyKanoje/Final-Year-Project/blob/main/index.html)
 
 2. Enter the project directory
 
@@ -308,7 +307,7 @@ Click Inspect PCB.
 
 The demo will display PASS or FAIL.
 
-🤖 Future AI Implementation
+## 🤖 Future AI Implementation
 
 The planned final system will replace the random demo result with an actual computer-vision/AI pipeline.
 
@@ -344,7 +343,7 @@ Other visible defects depending on the dataset
 
 Final defect classes will depend on the dataset and trained model used in the implementation.
 
-📈 Development Roadmap
+## 📈 Development Roadmap
 
 Create PCB inspection dashboard
 
@@ -382,7 +381,7 @@ Add data logging
 
 Add optional cloud/web monitoring
 
-📊 Project Status
+## 📊 Project Status
 
 Module
 
@@ -448,7 +447,7 @@ Cloud Monitoring
 
 🔄 Future
 
-📚 Literature Survey
+## 📚 Literature Survey
 
 The project presentation references research related to automated PCB inspection and deep-learning-based PCB defect detection.
 
@@ -470,7 +469,7 @@ Minghui Shen et al.
 
 Scientific Reports, 2024.
 
-👥 Project Team
+## 👥 Project Team
 
 Priyadarshini College of Engineering, Nagpur
 Department of Electronics and Telecommunication Engineering
@@ -504,7 +503,7 @@ Project Guide
 
 Dr. (Mrs.) S.P. Washimkar
 
-📷 Project Screenshots
+## 📷 Project Screenshots
 
 Add your actual dashboard screenshot here:
 
@@ -518,7 +517,7 @@ images/
 ├── circuit-diagram.png
 └── hardware-setup.jpg
 
-🔮 Future Scope
+## 🔮 Future Scope
 
 The system can be extended with:
 
@@ -542,7 +541,7 @@ Mobile/web notifications
 
 Automatic inspection reports
 
-⚠️ Current Limitations
+## ⚠️ Current Limitations
 
 The current GitHub version is primarily a frontend prototype.
 
@@ -564,7 +563,7 @@ GPIO hardware control
 
 A suitable PCB image dataset
 
-📖 References
+## 📖 References
 
 M. Moganti, F. Ercal, C. H. Dagli, and S. Tsunekawa, Automatic PCB Inspection Algorithms: A Survey, Computer Vision and Image Understanding, 1996.
 
@@ -576,6 +575,6 @@ OpenCV documentation.
 
 Minghui Shen et al., Defect Detection of Printed Circuit Board Assembly Based on YOLOv5, Scientific Reports, 2024.
 
-⭐ Acknowledgement
+## ⭐ Acknowledgement
 
 This project is developed as an academic project by the Department of Electronics and Telecommunication Engineering, Priyadarshini College of Engineering, Nagpur.
